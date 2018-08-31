@@ -1,0 +1,73 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #E5F3F2;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+h1 {
+  font-family: 'Roboto Slab', serif;
+  color: #6D6E71;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+span {
+  color: #00A79D;
+}
+
+.input {
+  width: 33%;
+  height: 50%;
+  padding: 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: .9rem;
+  
+}
+
+.save-button {
+  width: 34%;
+  background-color: #00A79D;
+  color: #FFF;
+}
+
+.save-button:hover {
+  background-color: #045E55;
+
+}
+
+::placeholder {
+  color: #939598;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.search-input {
+  margin-top: .9rem;
+}
