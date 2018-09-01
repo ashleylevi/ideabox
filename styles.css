@@ -96,7 +96,7 @@ h1 {
   align-items: center;
   color: #6D6E71;
   font-family: 'Roboto Slab', serif;
-  font-weight: 700;
+  
 }
 
 .box-body {
@@ -107,9 +107,13 @@ h1 {
 .box-title {
   justify-content: space-between;
   font-size: 1.4rem;
+  font-weight: 700;
 
 }
 
+.box-quality {
+  font-weight: 400;
+}
 
 .upvote-button {
  margin-right: 1rem;
@@ -137,11 +141,11 @@ h1 {
   border: none;
 }
 
-.downvote-button:hover{
+.downvote-button:hover {
   background-image: url("images/downvote-hover.svg");
 }
 
-.delete-button{
+.delete-button {
   background-image:  url("images/delete.svg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -149,6 +153,13 @@ h1 {
   height: 1.6rem;
   border: none;
 }
-.delete-button:hover{
+.delete-button:hover {
   background-image: url("images/delete-hover.svg");
+}
+
+.quality-setting {
+  margin-left: .5rem;
+  font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
+
 }
