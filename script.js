@@ -6,6 +6,7 @@ var ideaDisplay = $('.idea-display');
 var upvoteButton = $('.upvote-button');
 var downvoteButton = $('.downvote-button');
 var ideaCount = 0;
+var myArray = [];
 
 saveButton.on('click', createIdea);
 ideaDisplay.on('click', deleteIdea);
@@ -21,13 +22,16 @@ function createIdea(e){
     <div class="box-body" contenteditable="true">${bodyInputField.val()}</div>
     <div class="box-quality"><button class="upvote-button"> </button> <button class="downvote-button"> </button> quality: <span class="quality-setting">swill<span></div>
     </div>`)
+  storeIdeaBox();
   clearInputFields();
+  ideaCount++;
 }
 
 function clearInputFields(){
   titleInputField.val('');
   bodyInputField.val('');
   searchInputField.val('');
+  enableSubmitButton();
 }
 
 function deleteIdea(e) {
@@ -70,6 +74,27 @@ function enableSubmitButton() {
   }
 
 }
+
+function storeIdeaBox(){
+  var firstIdeaBox = {'title': titleInputField.val(),'body': bodyInputField.val()};
+  var timeStamp = $.now()
+  localStorage.setItem(timeStamp, JSON.stringify(firstIdeaBox));
+}
+
+function displayIdeas(){
+var retrievedIdeaBox = localStorage.getItem(timeStamp);
+var parsedObject = JSON.parse(retrievedIdeaBox);
+}
+
+
+
+
+// function IdeaBox(title, body, quality){
+//   this.title = title;
+//   this.body = body;
+//   this.quality = swill;
+//   this.id = 0;
+// }
 
 
 
