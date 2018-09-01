@@ -28,7 +28,7 @@ h1 {
   margin-top: 1rem;
 }
 
-span {
+.idea {
   color: #00A79D;
 }
 
@@ -70,4 +70,85 @@ span {
 
 .search-input {
   margin-top: .9rem;
+}
+.idea-display{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column
+}
+
+.idea-box {
+  border-bottom: 1px solid #939598;  
+  width: 34%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: start;
+  padding: 1rem .2rem 1rem .2rem;
+  box-sizing: border-box;
+
+}
+
+.box-title, .box-quality {
+  display: flex;
+  align-items: center;
+  color: #6D6E71;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+}
+
+.box-body {
+  color: #939598;
+  margin: 1rem 0rem 1rem 0rem;
+}
+
+.box-title {
+  justify-content: space-between;
+  font-size: 1.4rem;
+
+}
+
+
+.upvote-button {
+ margin-right: 1rem;
+  margin-left: .2rem;
+  background-image: url("images/upvote.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: none;
+
+}
+.upvote-button:hover{
+  background-image: url("images/upvote-hover.svg");
+}
+
+.downvote-button {
+  margin-right: 1rem;
+  margin-left: .2rem;
+  background-image: url("images/downvote.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: none;
+}
+
+.downvote-button:hover{
+  background-image: url("images/downvote-hover.svg");
+}
+
+.delete-button{
+  background-image:  url("images/delete.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: none;
+}
+.delete-button:hover{
+  background-image: url("images/delete-hover.svg");
 }
