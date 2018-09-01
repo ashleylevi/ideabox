@@ -80,7 +80,7 @@ span {
 }
 
 .idea-box {
-  border-bottom: 1px solid black;  
+  border-bottom: 1px solid #939598;  
   width: 34%;
   display: flex;
   flex-direction: column;
@@ -110,19 +110,45 @@ span {
 
 }
 
-img {
-  width: 1.6rem;
-  height: 1.6rem;
-}
 
-.upvote {
+.upvote-button {
  margin-right: 1rem;
   margin-left: .2rem;
+  background-image: url("images/upvote.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: none;
 
 }
+.upvote-button:hover{
+  background-image: url("images/upvote-hover.svg");
+}
 
-.downvote {
+.downvote-button {
   margin-right: 1rem;
   margin-left: .2rem;
+  background-image: url("images/downvote.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: none;
+}
 
+.downvote-button:hover{
+  background-image: url("images/downvote-hover.svg");
+}
+
+.delete-button{
+  background-image:  url("images/delete.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: none;
+}
+.delete-button:hover{
+  background-image: url("images/delete-hover.svg");
 }
