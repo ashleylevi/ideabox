@@ -3,9 +3,10 @@ var bodyInputField = $('.body-input');
 var saveButton = $('.save-button');
 var searchInputField = $('.search-input');
 var ideaDisplay = $('.idea-display');
-var deleteButton = $('.delete-button';)
+
 
 saveButton.on('click', createIdea);
+ideaDisplay.on('click', deleteIdea);
 
 function createIdea(e){
   e.preventDefault();
@@ -21,4 +22,10 @@ function clearInputFields(){
   titleInputField.val('');
   bodyInputField.val('');
   searchInputField.val('');
+}
+
+function deleteIdea(e) {
+  if (e.target.className === 'delete-button') {
+  $(e.target).parent().parent().remove();
+}
 }
