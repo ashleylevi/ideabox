@@ -79,10 +79,50 @@ span {
   flex-direction: column
 }
 
-.idea-box{
-  border: solid 1px black;
+.idea-box {
+  border-bottom: 1px solid black;  
   width: 34%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  justify-content: start;
+  padding: 1rem .2rem 1rem .2rem;
+  box-sizing: border-box;
+
+}
+
+.box-title, .box-quality {
+  display: flex;
+  align-items: center;
+  color: #6D6E71;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+}
+
+.box-body {
+  color: #939598;
+  margin: 1rem 0rem 1rem 0rem;
+}
+
+.box-title {
+  justify-content: space-between;
+  font-size: 1.4rem;
+
+}
+
+img {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.upvote {
+ margin-right: 1rem;
+  margin-left: .2rem;
+
+}
+
+.downvote {
+  margin-right: 1rem;
+  margin-left: .2rem;
+
 }

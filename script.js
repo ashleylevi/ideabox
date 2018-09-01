@@ -9,10 +9,10 @@ saveButton.on('click', createIdea);
 function createIdea(e){
   e.preventDefault();
   ideaDisplay.prepend(`<div class="idea-box"> 
-    <h2> ${titleInputField.val()} </h2>
-    <p>   ${bodyInputField.val()} </p>
-    </div>
-    <hr/>`)
+    <div class="box-title">${titleInputField.val()}<img src="images/delete.svg"></div>
+    <div class="box-body">${bodyInputField.val()}</div>
+    <div class="box-quality"><img src="images/upvote.svg" class="upvote"><img src="images/downvote.svg" class="downvote">quality:</div>
+    </div>`)
   clearInputFields();
 }
 
