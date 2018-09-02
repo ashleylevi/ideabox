@@ -7,6 +7,8 @@ var upvoteButton = $('.upvote-button');
 var downvoteButton = $('.downvote-button');
 var ideaCount = 0;
 var myArray = [];
+// var timeStamp = $.now();
+
 
 saveButton.on('click', createIdea);
 ideaDisplay.on('click', deleteIdea);
@@ -17,12 +19,13 @@ bodyInputField.on('keyup', enableSubmitButton);
 
 function createIdea(e){
   e.preventDefault();
-  ideaDisplay.prepend(`<div class="idea-box"> 
+  var timeStamp = $.now();
+  ideaDisplay.prepend(`<div class="idea-box" id="${timeStamp}"> 
     <div class="box-title" contenteditable="true">${titleInputField.val()} <button class="delete-button" ></button></div>
     <div class="box-body" contenteditable="true">${bodyInputField.val()}</div>
     <div class="box-quality"><button class="upvote-button"> </button> <button class="downvote-button"> </button> quality: <span class="quality-setting">swill<span></div>
     </div>`)
-  storeIdeaBox();
+  storeIdeaBox(timeStamp);
   clearInputFields();
   ideaCount++;
 }
@@ -75,16 +78,23 @@ function enableSubmitButton() {
 
 }
 
-function storeIdeaBox(){
-  var firstIdeaBox = {'title': titleInputField.val(),'body': bodyInputField.val()};
-  var timeStamp = $.now()
+function storeIdeaBox(timeStamp){
+  var timeStamp = timeStamp;
+  var firstIdeaBox = {'title': titleInputField.val(),'body': bodyInputField.val(), 'id': timeStamp};
   localStorage.setItem(timeStamp, JSON.stringify(firstIdeaBox));
 }
 
 function displayIdeas(){
-var retrievedIdeaBox = localStorage.getItem(timeStamp);
-var parsedObject = JSON.parse(retrievedIdeaBox);
+var retrievedIdeaBox = localStorage.getItem(firstIdeaBox);
+var parsedIdeaBox = JSON.parse(retrievedIdeaBox);
 }
+
+
+
+
+
+
+
 
 
 
