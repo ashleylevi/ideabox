@@ -45,26 +45,30 @@ function deleteIdea(e) {
 
 function upvoteIdea(e){
   if (e.target.className === 'upvote-button') {
-    if ($('.quality-setting').text() ==='swill') {
-  
-      $('.quality-setting').text('plausible');
+   
+    
+    
+    
+    if ($(e.target).siblings('.quality-setting').text() ==='swill') {
+
+      $(e.target).siblings('.quality-setting').text('plausible');
      }
 
     else {
-      $('.quality-setting').text('genius');
+      $(e.target).siblings('.quality-setting').text('genius');
     }
   }
 };
 
 function downvoteIdea(e){
   if (e.target.className === 'downvote-button') {
-    if ($('.quality-setting').text() ==='genius') {
+    if ($(e.target).siblings('.quality-setting').text() ==='genius') {
   
-      $('.quality-setting').text('plausible');
+      $(e.target).siblings('.quality-setting').text('plausible');
      }
 
     else {
-      $('.quality-setting').text('swill');
+       $(e.target).siblings('.quality-setting').text('swill');
     }
   }
 };
