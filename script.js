@@ -32,8 +32,9 @@ function createIdea(e){
   var timeStamp = $.now();
   ideaDisplay.prepend(`
     <div class="idea-box" id="${timeStamp}"> 
-      <div class="box-title" contenteditable="true">${titleInputField.val()} 
-        <button class="delete-button" >
+      <div class="box-title">
+      <p class="ideaTitle" contenteditable="true" onfocusout="updateIdeaContent(event)">${titleInputField.val()}</p>
+        <button class="delete-button">
         </button>
       </div>
       <div class="box-body" contenteditable="true">${bodyInputField.val()}
@@ -137,8 +138,8 @@ function getIdeaFromLocalStorage(){
   var parsedIdeaToDisplay= JSON.parse(stringifiedIdea);
    ideaDisplay.prepend(`
     <div class="idea-box" id="${parsedIdeaToDisplay.id}"> 
-      <div class="box-title" contenteditable="true">${parsedIdeaToDisplay.title} 
-        <button class="delete-button" ></button>
+      <p class="ideaTitle" contenteditable="true" onfocusout="updateIdeaContent(event)">${parsedIdeaToDisplay.title}</p>
+        <button class="delete-button"></button>
       </div>
       <div class="box-body" contenteditable="true">${parsedIdeaToDisplay.body}</div>
       <div class="box-quality">
@@ -154,11 +155,23 @@ function getIdeaFromLocalStorage(){
 function updateStoredQuality(e){
   var timeStamp = $(e.target).parent().parent().attr('id');
   var storedIdea = JSON.parse(localStorage.getItem(timeStamp));
-    var pTagSibling = $(e.target).siblings('p')[0];
+  var pTagSibling = $(e.target).siblings('p')[0];
   var spanQuality = $(pTagSibling).children('.quality-setting')[0];
   storedIdea.quality = $(spanQuality).text();
   var stringifiedStoredIdea = JSON.stringify(storedIdea);
   localStorage.setItem(timeStamp, stringifiedStoredIdea);
+}
+
+function updateIdeaContent(event) {
+  var currentTimeStamp = $(event.target).parent().parent().attr('id');
+  console.log(currentTimeStamp);
+  var updatedTitle = $(event.target).text();
+  var storedIdea = JSON.parse(localStorage.getItem(currentTimeStamp));
+  storedIdea.title = updatedTitle;
+  var stringifiedStoredIdea = JSON.stringify(storedIdea);
+  localStorage.setItem(currentTimeStamp, stringifiedStoredIdea);
+
+
 }
 
 
