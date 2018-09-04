@@ -30,10 +30,19 @@ bodyInputField.on('keyup', enableSubmitButton);
 function createIdea(e){
   e.preventDefault();
   var timeStamp = $.now();
-  ideaDisplay.prepend(`<div class="idea-box" id="${timeStamp}"> 
-    <div class="box-title" contenteditable="true">${titleInputField.val()} <button class="delete-button" ></button></div>
-    <div class="box-body" contenteditable="true">${bodyInputField.val()}</div>
-    <div class="box-quality"><button class="upvote-button"> </button> <button class="downvote-button"> </button> quality: <span class="quality-setting">swill<span></div>
+  ideaDisplay.prepend(`
+    <div class="idea-box" id="${timeStamp}"> 
+      <div class="box-title" contenteditable="true">${titleInputField.val()} 
+        <button class="delete-button" >
+        </button>
+      </div>
+      <div class="box-body" contenteditable="true">${bodyInputField.val()}
+      </div>
+      <div class="box-quality">
+        <button class="upvote-button"> </button> 
+        <button class="downvote-button"> </button> 
+        <p> quality:<span class="quality-setting">swill<span></p>
+      </div>
     </div>`)
   storeIdea(timeStamp);
   clearInputFields();
@@ -54,20 +63,26 @@ function deleteIdea(e) {
 
 function upvoteIdea(e){
   if (e.target.className === 'upvote-button') {
-    if ($(e.target).siblings('.quality-setting').text() ==='swill') {
-     $(e.target).siblings('.quality-setting').text('plausible');
+    var qualitySpan = ($($(e.target).siblings('p')[0]).children('.quality-setting'));
+    if (qualitySpan.text() =='swill') {
+     qualitySpan.text('plausible');
+        updateStoredQuality(e);
      } else {
-      $(e.target).siblings('.quality-setting').text('genius');
+      qualitySpan.text('genius');
+        updateStoredQuality(e);
     }
   }
 };
 
 function downvoteIdea(e){
   if (e.target.className === 'downvote-button') {
-    if ($(e.target).siblings('.quality-setting').text() ==='genius') {
-    $(e.target).siblings('.quality-setting').text('plausible');
+    var qualitySpan = ($($(e.target).siblings('p')[0]).children('.quality-setting'));
+    if (qualitySpan.text() ==='genius') {
+      qualitySpan.text('plausible');
+      updateStoredQuality(e);
      }else {
-       $(e.target).siblings('.quality-setting').text('swill');
+       qualitySpan.text('swill');
+        updateStoredQuality(e);
     }
   }
 };
@@ -78,7 +93,6 @@ function enableSubmitButton() {
   } else {
     saveButton.prop('disabled', false);
   }
-
 }
 
 // after an idea is posted to the browser, this function runs to store the newly 
@@ -90,10 +104,14 @@ function enableSubmitButton() {
 // using set item which takes two parameters (a key, and it's value). Here, the key is 
 // the timeStamp for the idea and its value is the stringified object. 
 function storeIdea(timeStamp){
-  var ideaToStore = {'title': titleInputField.val(),'body': bodyInputField.val(), 'id': timeStamp};
+  var ideaToStore = {'title': titleInputField.val(),'body': bodyInputField.val(), 'id': timeStamp, 'quality': 'swill'};
   var stringifiedIdea= JSON.stringify(ideaToStore);
   localStorage.setItem(timeStamp, stringifiedIdea);
 }
+
+
+
+
 
 
 // after an idea is stored in local storage, we need to get the idea from storage
@@ -108,16 +126,45 @@ function storeIdea(timeStamp){
 // the html and prepend it to the idea display so it stays whenever the page reloads.
 function getIdeaFromLocalStorage(){
   for (var i=0; i < localStorage.length; i++) {
-  var timeStamp= localStorage.key(i);
+ var timeStamp= localStorage.key(i);
   var stringifiedIdea = localStorage.getItem(timeStamp)
   var parsedIdeaToDisplay= JSON.parse(stringifiedIdea);
-   ideaDisplay.prepend(`<div class="idea-box" id="${parsedIdeaToDisplay.id}"> 
-    <div class="box-title" contenteditable="true">${parsedIdeaToDisplay.title} <button class="delete-button" ></button></div>
-    <div class="box-body" contenteditable="true">${parsedIdeaToDisplay.body}</div>
-    <div class="box-quality"><button class="upvote-button"> </button> <button class="downvote-button"> </button> quality: <span class="quality-setting">swill<span></div>
+   ideaDisplay.prepend(`
+    <div class="idea-box" id="${parsedIdeaToDisplay.id}"> 
+      <div class="box-title" contenteditable="true">${parsedIdeaToDisplay.title} 
+        <button class="delete-button" ></button>
+      </div>
+      <div class="box-body" contenteditable="true">${parsedIdeaToDisplay.body}</div>
+      <div class="box-quality">
+        <button class="upvote-button"> </button> 
+        <button class="downvote-button"> </button>
+        <p>quality: <span class="quality-setting">${parsedIdeaToDisplay.quality}<span></p>
+       </div>
     </div>`)
   }
 }
+
+
+function updateStoredQuality(e){
+  var timeStamp = $(e.target).parent().parent().attr('id');
+  var storedIdea = JSON.parse(localStorage.getItem(timeStamp));
+  var pTagSibling = $(e.target).siblings('p')[0];
+  var spanQuality = $(pTagSibling).children('.quality-setting')[0];
+  storedIdea.quality = $(spanQuality).text();
+  var stringifiedStoredIdea = JSON.stringify(storedIdea);
+  localStorage.setItem(timeStamp, stringifiedStoredIdea);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
