@@ -58,7 +58,13 @@ function clearInputFields(){
 function deleteIdea(e) {
   if (e.target.className === 'delete-button') {
   $(e.target).parent().parent().remove();
+  deleteIdeaFromStorage(e)
 }
+}
+
+function deleteIdeaFromStorage(e) {
+  var timeStampParent = $(e.target).parent().parent().attr('id');
+  localStorage.removeItem(timeStampParent);
 }
 
 function upvoteIdea(e){
@@ -148,7 +154,7 @@ function getIdeaFromLocalStorage(){
 function updateStoredQuality(e){
   var timeStamp = $(e.target).parent().parent().attr('id');
   var storedIdea = JSON.parse(localStorage.getItem(timeStamp));
-  var pTagSibling = $(e.target).siblings('p')[0];
+    var pTagSibling = $(e.target).siblings('p')[0];
   var spanQuality = $(pTagSibling).children('.quality-setting')[0];
   storedIdea.quality = $(spanQuality).text();
   var stringifiedStoredIdea = JSON.stringify(storedIdea);
