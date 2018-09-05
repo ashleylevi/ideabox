@@ -1,21 +1,20 @@
 body {
   font-family: 'Open Sans', sans-serif;
-
 }
 
 .top {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
   background-color: #E5F3F2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 form {
-  display: flex;
   align-items: center;
-  justify-content: center;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
 }
 
@@ -33,24 +32,22 @@ h1 {
 }
 
 .input {
-  width: 33%;
   height: 50%;
-  padding: 4px;
   font-size: 1rem;
   font-weight: 700;
-  margin-bottom: .9rem;
-  
+  margin-bottom: .9rem; 
+  padding: 4px;
+  width: 33%;
 }
 
 .save-button {
-  width: 34%;
   background-color: #00A79D;
   color: #FFF;
+  width: 34%;
 }
 
 .save-button:hover {
   background-color: #045E55;
-
 }
 
 ::placeholder {
@@ -59,44 +56,41 @@ h1 {
   font-weight: 700;
 }
 
-
 .bottom {
-  display: flex;
   align-items: center;
-  justify-content: center;
+  display: flex;
   flex-direction: column;
-
+  justify-content: center;
 }
 
 .search-input {
   margin-top: .9rem;
 }
+
 .idea-display{
-  width: 100%;
-  display: flex;
   align-items: center;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  flex-direction: column
+  width: 100%;
 }
 
 .idea-box {
   border-bottom: 1px solid #939598;  
-  width: 34%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: start;
   padding: 1rem .2rem 1rem .2rem;
-  box-sizing: border-box;
-
+  width: 34%;
 }
 
 .box-title, .box-quality {
-  display: flex;
   align-items: center;
   color: #6D6E71;
   font-family: 'Roboto Slab', serif;
-  
+  display: flex;
 }
 
 .box-body {
@@ -105,9 +99,9 @@ h1 {
 }
 
 .box-title {
-  justify-content: space-between;
   font-size: 1.4rem;
   font-weight: 700;
+  justify-content: space-between;
 }
 
 .box-quality {
@@ -115,29 +109,29 @@ h1 {
 }
 
 .upvote-button {
- margin-right: 1rem;
-  margin-left: .2rem;
   background-image: url("images/upvote.svg");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 1.6rem;
-  height: 1.6rem;
   border: none;
-
+  height: 1.6rem;
+  margin-left: .2rem;
+  margin-right: 1rem;
+  width: 1.6rem;
 }
+
 .upvote-button:hover{
   background-image: url("images/upvote-hover.svg");
 }
 
 .downvote-button {
-  margin-right: 1rem;
-  margin-left: .2rem;
   background-image: url("images/downvote.svg");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 1.6rem;
-  height: 1.6rem;
   border: none;
+  height: 1.6rem;
+  margin-left: .2rem;
+  margin-right: 1rem;
+  width: 1.6rem;
 }
 
 .downvote-button:hover {
@@ -148,17 +142,21 @@ h1 {
   background-image:  url("images/delete.svg");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 1.6rem;
-  height: 1.6rem;
   border: none;
+  height: 1.6rem;
+  width: 1.6rem;
 }
+
 .delete-button:hover {
   background-image: url("images/delete-hover.svg");
 }
 
 .quality-setting {
-  margin-left: .5rem;
-  font-weight: 400;
   font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  margin-left: .5rem;
+}
 
+.hidden{
+  display: none;
 }
