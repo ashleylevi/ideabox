@@ -28,6 +28,7 @@ h1 {
   margin-top: 1rem;
 }
 
+
 .idea {
   color: #00A79D;
 }
@@ -161,4 +162,9 @@ h1 {
   font-weight: 400;
   font-family: 'Open Sans', sans-serif;
 
+}
+
+/*keep at bottom*/
+.hidden{
+  display: none;
 }

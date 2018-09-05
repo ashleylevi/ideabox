@@ -19,6 +19,21 @@ ideaDisplay.on('click', upvoteIdea);
 ideaDisplay.on('click', downvoteIdea);
 titleInputField.on('keyup', enableSubmitButton);
 bodyInputField.on('keyup', enableSubmitButton);
+searchInputField.on('keyup', searchIdeas);
+
+// searchInputField.keyup(function(){
+//     var searchValue = searchInputField.val().toLowerCase();
+//       debugger;
+//     $('.id-title').each(function(){
+//       if (!contains($(this).text().toLowerCase(), searchValue))
+//         $(this).hide();
+//       else{
+//         $(this).show();
+//       }
+//     });;
+// });
+
+
 
 
 // whenever someone submits an idea, first a timeStamp of the current time is called
@@ -139,10 +154,10 @@ function getIdeaFromLocalStorage(){
    ideaDisplay.prepend(`
     <div class="idea-box" id="${parsedIdeaToDisplay.id}"> 
       <div class = "box-title">
-      <p class="ideaTitle" contenteditable="true" onfocusout="updateIdeaContent(event)">${parsedIdeaToDisplay.title}</p>
+      <p class="ideaTitle" contenteditable="true" onfocusout="updateIdeaTitle(event)">${parsedIdeaToDisplay.title}</p>
         <button class="delete-button"></button>
       </div>
-      <div class="box-body" contenteditable="true">${parsedIdeaToDisplay.body}</div>
+      <div class="box-body" contenteditable="true" onfocusout="updateIdeaBody(event)">${parsedIdeaToDisplay.body}</div>
       <div class="box-quality">
         <button class="upvote-button"> </button> 
         <button class="downvote-button"> </button>
@@ -184,9 +199,20 @@ function updateIdeaBody(event){
 
 
 
-
-
-
+function searchIdeas() {
+  var searchValue = searchInputField.val().toLowerCase();
+  var allIdeas = $('.idea-box');
+  for (var i=0; i < allIdeas.length; i++) {
+    var ideaTitle = $(allIdeas[i]).children('.box-title').text();
+    var ideaBody = $(allIdeas[i]).children('.box-body').text();
+    if (ideaTitle.includes(searchValue) || ideaBody.includes(searchValue)){
+      $(allIdeas[i]).removeClass('hidden');
+    }
+    else{
+      $(allIdeas[i]).addClass('hidden')
+    }
+  }
+};
 
 
 
