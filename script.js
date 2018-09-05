@@ -19,6 +19,7 @@ ideaDisplay.on('click', upvoteIdea);
 ideaDisplay.on('click', downvoteIdea);
 titleInputField.on('keyup', enableSubmitButton);
 bodyInputField.on('keyup', enableSubmitButton);
+searchInputField.on('keyup', searchIdeas);
 
 
 // whenever someone submits an idea, first a timeStamp of the current time is called
@@ -139,10 +140,10 @@ function getIdeaFromLocalStorage(){
    ideaDisplay.prepend(`
     <div class="idea-box" id="${parsedIdeaToDisplay.id}"> 
       <div class = "box-title">
-      <p class="ideaTitle" contenteditable="true" onfocusout="updateIdeaContent(event)">${parsedIdeaToDisplay.title}</p>
+      <p class="ideaTitle" contenteditable="true" onfocusout="updateIdeaTitle(event)">${parsedIdeaToDisplay.title}</p>
         <button class="delete-button"></button>
       </div>
-      <div class="box-body" contenteditable="true">${parsedIdeaToDisplay.body}</div>
+      <div class="box-body" contenteditable="true" onfocus="updateIdeaBody(event)">${parsedIdeaToDisplay.body}</div>
       <div class="box-quality">
         <button class="upvote-button"> </button> 
         <button class="downvote-button"> </button>
@@ -176,12 +177,23 @@ function updateIdeaTitle(event) {
 function updateIdeaBody(event){
    var currentTimeStamp = $(event.target).parent().attr('id');
    var updatedBody = $(event.target).text();
+   debugger
    var storedIdea = JSON.parse(localStorage.getItem(currentTimeStamp));
    storedIdea.body = updatedBody;
    var stringifiedStoredIdea = JSON.stringify(storedIdea);
   localStorage.setItem(currentTimeStamp, stringifiedStoredIdea);
 }
 
+function searchIdeas() {
+  var searchValue = searchInputField.val().toLowerCase();
+  var allIdeas = Object.keys(localStorage);
+  for (var i=0; i < allIdeas.length; i++) {
+    if ($.contains(allIdeas, searchValue)) {
+      console.log('hi!');
+    }
+  }
+
+}
 
 
 
