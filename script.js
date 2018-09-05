@@ -21,20 +21,6 @@ titleInputField.on('keyup', enableSubmitButton);
 bodyInputField.on('keyup', enableSubmitButton);
 searchInputField.on('keyup', searchIdeas);
 
-// searchInputField.keyup(function(){
-//     var searchValue = searchInputField.val().toLowerCase();
-//       debugger;
-//     $('.id-title').each(function(){
-//       if (!contains($(this).text().toLowerCase(), searchValue))
-//         $(this).hide();
-//       else{
-//         $(this).show();
-//       }
-//     });;
-// });
-
-
-
 
 // whenever someone submits an idea, first a timeStamp of the current time is called
 // using the .now method and set into a variable called timeStamp. the idea renders
@@ -213,18 +199,5 @@ function searchIdeas() {
     }
   }
 };
-
-
-
-
-
-
-// function IdeaBox(title, body, quality){
-//   this.title = title;
-//   this.body = body;
-//   this.quality = swill;
-//   this.id = 0;
-// }
-
 
 
