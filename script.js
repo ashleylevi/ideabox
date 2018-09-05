@@ -10,8 +10,6 @@ var searchInputField = $('.search-input');
 var ideaDisplay = $('.idea-display');
 var upvoteButton = $('.upvote-button');
 var downvoteButton = $('.downvote-button');
-// var timeStamp = $.now();
-
 
 saveButton.on('click', createIdea);
 ideaDisplay.on('click', deleteIdea);
@@ -20,7 +18,6 @@ ideaDisplay.on('click', downvoteIdea);
 titleInputField.on('keyup', enableSubmitButton);
 bodyInputField.on('keyup', enableSubmitButton);
 searchInputField.on('keyup', searchIdeas);
-
 
 // whenever someone submits an idea, first a timeStamp of the current time is called
 // using the .now method and set into a variable called timeStamp. the idea renders
@@ -48,39 +45,39 @@ function createIdea(e){
     </div>`)
   storeIdea(timeStamp);
   clearInputFields();
-}
+};
 
 function clearInputFields(){
   titleInputField.val('');
   bodyInputField.val('');
   searchInputField.val('');
   enableSubmitButton();
-}
+};
 
 function deleteIdea(e) {
   if (e.target.className === 'delete-button') {
-  $(e.target).parent().parent().remove();
-  deleteIdeaFromStorage(e)
-}
-}
+    $(e.target).parent().parent().remove();
+    deleteIdeaFromStorage(e)
+  }
+};
 
 function deleteIdeaFromStorage(e) {
   var timeStampParent = $(e.target).parent().parent().attr('id');
   localStorage.removeItem(timeStampParent);
-}
+};
 
-function upvoteIdea(e){
+function upvoteIdea(e) {
   if (e.target.className === 'upvote-button') {
     var qualitySpan = ($($(e.target).siblings('p')[0]).children('.quality-setting'));
-    if (qualitySpan.text() =='swill') {
-     qualitySpan.text('plausible');
+      if (qualitySpan.text() =='swill') {
+        qualitySpan.text('plausible');
         updateStoredQuality(e);
-     } else {
-      qualitySpan.text('genius');
+      } else {
+        qualitySpan.text('genius');
         updateStoredQuality(e);
+      }
     }
-  }
-};
+  };
 
 function downvoteIdea(e){
   if (e.target.className === 'downvote-button') {
@@ -101,7 +98,7 @@ function enableSubmitButton() {
   } else {
     saveButton.prop('disabled', false);
   }
-}
+};
 
 // after an idea is posted to the browser, this function runs to store the newly 
 // created idea in localStorage. First we take the value of the title input,
@@ -115,12 +112,7 @@ function storeIdea(timeStamp){
   var ideaToStore = {'title': titleInputField.val(),'body': bodyInputField.val(), 'id': timeStamp, 'quality': 'swill'};
   var stringifiedIdea= JSON.stringify(ideaToStore);
   localStorage.setItem(timeStamp, stringifiedIdea);
-}
-
-
-
-
-
+};
 
 // after an idea is stored in local storage, we need to get the idea from storage
 // and keep it on the page when the broswer reloads. When this function is called
@@ -134,27 +126,29 @@ function storeIdea(timeStamp){
 // the html and prepend it to the idea display so it stays whenever the page reloads.
 function getIdeaFromLocalStorage(){
   for (var i=0; i < localStorage.length; i++) {
- var timeStamp= localStorage.key(i);
-  var stringifiedIdea = localStorage.getItem(timeStamp)
-  var parsedIdeaToDisplay= JSON.parse(stringifiedIdea);
-   ideaDisplay.prepend(`
-    <div class="idea-box" id="${parsedIdeaToDisplay.id}"> 
-      <div class = "box-title">
-      <p class="ideaTitle" contenteditable="true" onfocusout="updateIdeaTitle(event)">${parsedIdeaToDisplay.title}</p>
-        <button class="delete-button"></button>
-      </div>
-      <div class="box-body" contenteditable="true" onfocusout="updateIdeaBody(event)">${parsedIdeaToDisplay.body}</div>
-      <div class="box-quality">
-        <button class="upvote-button"> </button> 
-        <button class="downvote-button"> </button>
-        <p>quality: <span class="quality-setting">${parsedIdeaToDisplay.quality}<span></p>
-       </div>
-    </div>`)
+    var timeStamp= localStorage.key(i);
+    var stringifiedIdea = localStorage.getItem(timeStamp)
+    var parsedIdeaToDisplay= JSON.parse(stringifiedIdea);
+    ideaDisplay.prepend(`
+      <div class="idea-box" id="${parsedIdeaToDisplay.id}"> 
+        <div class = "box-title">
+          <p class="ideaTitle" contenteditable="true" onfocusout="updateIdeaTitle(event)">
+            ${parsedIdeaToDisplay.title}
+          </p>
+          <button class="delete-button"></button>
+        </div>
+        <div class="box-body" contenteditable="true" onfocusout="updateIdeaBody(event)">
+          ${parsedIdeaToDisplay.body}</div>
+        <div class="box-quality">
+          <button class="upvote-button"> </button> 
+          <button class="downvote-button"> </button>
+          <p>quality: <span class="quality-setting">${parsedIdeaToDisplay.quality}<span></p>
+         </div>
+      </div>`)
   }
-}
+};
 
-
-function updateStoredQuality(e){
+function updateStoredQuality(e) {
   var timeStamp = $(e.target).parent().parent().attr('id');
   var storedIdea = JSON.parse(localStorage.getItem(timeStamp));
   var pTagSibling = $(e.target).siblings('p')[0];
@@ -162,7 +156,7 @@ function updateStoredQuality(e){
   storedIdea.quality = $(spanQuality).text();
   var stringifiedStoredIdea = JSON.stringify(storedIdea);
   localStorage.setItem(timeStamp, stringifiedStoredIdea);
-}
+};
 
 function updateIdeaTitle(event) {
   var currentTimeStamp = $(event.target).parent().parent().attr('id');
@@ -171,8 +165,7 @@ function updateIdeaTitle(event) {
   storedIdea.title = updatedTitle;
   var stringifiedStoredIdea = JSON.stringify(storedIdea);
   localStorage.setItem(currentTimeStamp, stringifiedStoredIdea);
-}
-
+};
 
 function updateIdeaBody(event){
    var currentTimeStamp = $(event.target).parent().attr('id');
@@ -182,9 +175,10 @@ function updateIdeaBody(event){
    var stringifiedStoredIdea = JSON.stringify(storedIdea);
   localStorage.setItem(currentTimeStamp, stringifiedStoredIdea);
 }
-
-
-
+/*checks title and body text of each idea using for loop to see if
+they include search input text. if they do, remove class hidden, if not
+then add class hidden.
+*/
 function searchIdeas() {
   var searchValue = searchInputField.val().toLowerCase();
   var allIdeas = $('.idea-box');
@@ -199,5 +193,3 @@ function searchIdeas() {
     }
   }
 };
-
-
