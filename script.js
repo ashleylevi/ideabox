@@ -15,7 +15,7 @@ titleInputField.on('keyup', enableSubmitButton);
 bodyInputField.on('keyup', enableSubmitButton);
 searchInputField.on('keyup', searchIdeas);
 
-function createIdea(e){
+function createIdea(e) {
   e.preventDefault();
   var timeStamp = $.now();
   ideaDisplay.prepend(`
@@ -35,9 +35,9 @@ function createIdea(e){
     </div>`)
   storeIdea(timeStamp);
   clearInputFields();
-};
+}
 
-function getIdeaFromLocalStorage(){
+function getIdeaFromLocalStorage() {
   for (var i=0; i < localStorage.length; i++) {
     var timeStamp = localStorage.key(i);
     var stringifiedIdea = localStorage.getItem(timeStamp)
@@ -59,52 +59,52 @@ function getIdeaFromLocalStorage(){
          </div>
       </div>`)
   }
-};
+}
 
-function clearInputFields(){
+function clearInputFields() {
   titleInputField.val('');
   bodyInputField.val('');
   searchInputField.val('');
   enableSubmitButton();
-};
+}
 
 function deleteIdea(e) {
   if (e.target.className === 'delete-button') {
     $(e.target).parent().parent().remove();
     deleteIdeaFromStorage(e)
   }
-};
+}
 
 function deleteIdeaFromStorage(e) {
   var timeStampParent = $(e.target).parent().parent().attr('id');
   localStorage.removeItem(timeStampParent);
-};
+}
 
 function upvoteIdea(e) {
   if (e.target.className === 'upvote-button') {
     var qualitySpan = ($($(e.target).siblings('p')[0]).children('.quality-setting'));
-      if (qualitySpan.text() =='swill') {
-        qualitySpan.text('plausible');
-        updateStoredQuality(e);
-      } else {
-        qualitySpan.text('genius');
-        updateStoredQuality(e);
-      }
+    if (qualitySpan.text() === 'swill') {
+      qualitySpan.text('plausible');
+      updateStoredQuality(e);
+    } else {
+      qualitySpan.text('genius');
+      updateStoredQuality(e);
     }
-  };
+  }
+}
 
-function downvoteIdea(e){
+function downvoteIdea(e) {
   if (e.target.className === 'downvote-button') {
     var qualitySpan = ($($(e.target).siblings('p')[0]).children('.quality-setting'));
     if (qualitySpan.text() ==='genius') {
       qualitySpan.text('plausible');
       updateStoredQuality(e);
-     } else {
-       qualitySpan.text('swill');
-        updateStoredQuality(e);
+    } else {
+      qualitySpan.text('swill');
+      updateStoredQuality(e);
     }
   }
-};
+}
 
 function enableSubmitButton() {
   if (bodyInputField.val() === '' || titleInputField.val() === '') {
@@ -112,13 +112,13 @@ function enableSubmitButton() {
   } else {
     saveButton.prop('disabled', false);
   }
-};
+}
 
 function storeIdea(timeStamp) {
   var ideaToStore = {'title': titleInputField.val(),'body': bodyInputField.val(), 'id': timeStamp, 'quality': 'swill'};
   var stringifiedIdea= JSON.stringify(ideaToStore);
   localStorage.setItem(timeStamp, stringifiedIdea);
-};
+}
 
 function updateStoredQuality(e) {
   var timeStamp = $(e.target).parent().parent().attr('id');
@@ -128,7 +128,7 @@ function updateStoredQuality(e) {
   storedIdea.quality = $(spanQuality).text();
   var stringifiedStoredIdea = JSON.stringify(storedIdea);
   localStorage.setItem(timeStamp, stringifiedStoredIdea);
-};
+}
 
 function updateIdeaTitle(event) {
   var currentTimeStamp = $(event.target).parent().parent().attr('id');
@@ -137,16 +137,16 @@ function updateIdeaTitle(event) {
   storedIdea.title = updatedTitle;
   var stringifiedStoredIdea = JSON.stringify(storedIdea);
   localStorage.setItem(currentTimeStamp, stringifiedStoredIdea);
-};
+}
 
 function updateIdeaBody(event){
-   var currentTimeStamp = $(event.target).parent().attr('id');
-   var updatedBody = $(event.target).text();
-   var storedIdea = JSON.parse(localStorage.getItem(currentTimeStamp));
-   storedIdea.body = updatedBody;
-   var stringifiedStoredIdea = JSON.stringify(storedIdea);
+  var currentTimeStamp = $(event.target).parent().attr('id');
+  var updatedBody = $(event.target).text();
+  var storedIdea = JSON.parse(localStorage.getItem(currentTimeStamp));
+  storedIdea.body = updatedBody;
+  var stringifiedStoredIdea = JSON.stringify(storedIdea);
   localStorage.setItem(currentTimeStamp, stringifiedStoredIdea);
-};
+}
 
 function searchIdeas() {
   var searchValue = searchInputField.val().toLowerCase();
@@ -154,11 +154,10 @@ function searchIdeas() {
   for (var i=0; i < allIdeas.length; i++) {
     var ideaTitle = $(allIdeas[i]).children('.box-title').text().toLowerCase();
     var ideaBody = $(allIdeas[i]).children('.box-body').text().toLowerCase();
-    if (ideaTitle.includes(searchValue) || ideaBody.includes(searchValue)){
+    if (ideaTitle.includes(searchValue) || ideaBody.includes(searchValue)) {
       $(allIdeas[i]).removeClass('hidden');
-    }
-    else {
+    } else {
       $(allIdeas[i]).addClass('hidden')
     }
   }
-};
+}
